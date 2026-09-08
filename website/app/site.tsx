@@ -2,6 +2,8 @@
 import { ArrowUpRight } from 'lucide-react';
 import Journey from './journey';
 import QuoteForm from './quote-form';
+import CruiseVideo from './cruise-video';
+import RotationViewer from './rotation-viewer';
 import { assetUrl } from '@/lib/assets';
 export default function Home() {
   return (
@@ -28,7 +30,8 @@ export default function Home() {
       </header>
       <main id="top">
         <Journey />
-        <section className="vehicle-section content-pad" id="details">
+        <section className="vehicle-section content-pad vehicle-rotation" id="details">
+          <RotationViewer />
           <div className="section-top">
             <p className="eyebrow">01 / THE LIMOUSINE</p>
             <p>ONE DISTINCTIVE RIDE</p>
@@ -44,17 +47,12 @@ export default function Home() {
               silhouette, and a cabin made for sharing the occasion.
             </p>
           </div>
-          <img
-            className="profile-photo"
-            src={assetUrl('photos/limousine-side.jpeg')}
-            alt="Full side profile of the actual white limousine"
-            loading="lazy"
-          />
           <div className="photo-note">
             <span>THE ACTUAL LIMOUSINE</span>
             <span>Custom exterior. Personal atmosphere.</span>
           </div>
         </section>
+        <CruiseVideo />
         <section className="interior-section content-pad">
           <div className="interior-photo">
             <img

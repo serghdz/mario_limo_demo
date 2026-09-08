@@ -299,10 +299,21 @@ export async function createJourney(
     }
     if (pivot)
       pivot.rotation.y = smooth(0.61, 0.76, p) * THREE.MathUtils.degToRad(72);
+    const portrait = camera.aspect < 1 && host.clientWidth <= 720;
+    // Center the complete exterior between the phone's title and controls.
+    // Fade back to the original target before crossing the passenger doorway.
+    if (portrait) {
+      target.z += 1.3 * (1 - smooth(0.49, 0.61, p));
+      pos.lerp(target, 0.3 * (1 - smooth(0.1, 0.4, p)));
+      const arrivalRoom = 0.3 * smooth(0.3, 0.43, p) * (1 - smooth(0.49, 0.61, p));
+      pos.sub(target).multiplyScalar(1 + arrivalRoom).add(target);
+    }
     camera.position.copy(pos);
     camera.lookAt(target);
     const baseFov = THREE.MathUtils.lerp(42, 65, smooth(0.75, 0.94, p));
-    camera.fov = Math.min(85, THREE.MathUtils.radToDeg(2 * Math.atan(Math.tan(THREE.MathUtils.degToRad(baseFov / 2)) * Math.max(1, 1.4 / camera.aspect))));
+    camera.fov = Math.min(portrait ? 112 : 85, THREE.MathUtils.radToDeg(2 * Math.atan(Math.tan(THREE.MathUtils.degToRad(baseFov / 2)) * Math.max(1, 1.4 / camera.aspect))));
+    if (portrait) camera.setViewOffset(host.clientWidth, host.clientHeight, 0, -host.clientHeight * 0.045, host.clientWidth, host.clientHeight);
+    else camera.clearViewOffset();
     camera.updateProjectionMatrix();
     renderer.toneMappingExposure = THREE.MathUtils.lerp(
       1,

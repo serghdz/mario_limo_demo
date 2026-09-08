@@ -256,6 +256,7 @@ em {
   margin-bottom: 6px;
 }
 .profile-photo {
+  border-radius: 18px;
   width: 100%;
   max-height: 500px;
   object-fit: contain;
@@ -280,7 +281,41 @@ em {
   padding-bottom: 130px;
   background: #0b1724;
 }
+.cruise-section { padding-top: 88px; padding-bottom: 24px; background: #0b1724; }
+.vehicle-rotation { position: relative; isolation: isolate; min-height: 900px; height: 110svh; padding-top: 64px; padding-bottom: 40px; color: var(--ivory); background: #30383e; display: flex; flex-direction: column; }
+.rotation-viewer { position: absolute; inset: 0; z-index: -1; overflow: hidden; touch-action: pan-y pinch-zoom; cursor: grab; }
+.rotation-viewer:active { cursor: grabbing; }
+.rotation-backdrop { position: absolute; inset: -40px; background-size: cover; background-position: center; filter: blur(40px) brightness(.5); opacity: .5; }
+.rotation-media { position: absolute; left: 0; top: 70%; width: 100%; height: auto; max-height: 100%; transform: translateY(-70%); object-fit: contain; pointer-events: none; mask-image: linear-gradient(180deg, transparent, black 15%, black 90%, transparent); }
+.rotation-viewer:after { content: ''; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, #081320ed 0%, #081320a6 22%, transparent 43%, transparent 76%, #081320ed 100%); }
+.vehicle-rotation .section-top, .vehicle-rotation .split-heading, .vehicle-rotation .photo-note { pointer-events: none; }
+.vehicle-rotation .section-top { border-color: #ffffff30; }
+.vehicle-rotation .eyebrow, .vehicle-rotation em { color: var(--champagne); }
+.vehicle-rotation .split-heading { margin-top: 35px; gap: 60px; }
+.vehicle-rotation .split-heading h2 { font-size: clamp(2.7rem, 4.1vw, 4.5rem); }
+.vehicle-rotation .split-heading > p { color: #d1d6d9; }
+.vehicle-rotation .photo-note { margin-top: auto; border-color: #ffffff30; }
+.rotation-hint { position: absolute; bottom: 110px; left: 8vw; z-index: 1; color: #f3efe6; font-size: 14px; pointer-events: none; }
+.rotation-hint span { display: block; color: #c0c8ce; font-size: 12px; margin-top: 3px; }
+@media(max-width:720px) {
+  .vehicle-rotation { min-height: 820px; height: 110svh; padding-top: 48px; padding-bottom: 30px; }
+  .vehicle-rotation .split-heading { gap: 22px; margin-top: 28px; }
+  .vehicle-rotation .split-heading h2 { font-size: clamp(2.6rem, 10vw, 3.5rem); }
+  .vehicle-rotation .split-heading > p { font-size: 14px; line-height: 1.65; }
+  .rotation-media { top: 68%; transform: translateY(-68%); }
+  .rotation-hint { left: 6vw; bottom: 140px; }
+  .vehicle-rotation .photo-note { gap: 20px; font-size: 11px; letter-spacing: .02em; }
+}
+.cruise-heading { display: flex; align-items: end; justify-content: space-between; gap: 30px; margin-bottom: 32px; }
+.cruise-heading h2 { font-size: clamp(2.3rem, 4.2vw, 4.5rem); margin-top: 18px; }
+.cruise-player { position: relative; aspect-ratio: 16 / 9; border-radius: 18px; overflow: hidden; background: #081320; border: 1px solid #ffffff20; cursor: pointer; touch-action: manipulation; }
+.cruise-player video { width: 100%; height: 100%; display: block; object-fit: contain; }
+@media (max-width: 720px) {
+  .cruise-section { padding-top: 58px; padding-bottom: 0; }
+  .cruise-heading { display: block; margin-bottom: 24px; }
+}
 .interior-photo img {
+  border-radius: 18px;
   width: 100%;
   height: 620px;
   object-fit: cover;
@@ -602,6 +637,8 @@ footer > a:last-child {
   color: #bbc2c9;
 }
 .journey-fallback {
+  border-radius: 18px;
+  overflow: hidden;
   position: absolute;
   left: 49%;
   right: 3%;
@@ -638,6 +675,7 @@ footer > a:last-child {
   max-width: 350px;
 }
 .quote-heading img {
+  border-radius: 18px;
   margin-top: 45px;
   width: 230px;
   height: 270px;
@@ -892,27 +930,56 @@ footer > a:last-child {
 @media (min-width:721px) and (max-width:1000px){.journey:not(.journey-simple) .journey-copy.first-chapter{top:24%;max-width:410px}.journey:not(.journey-simple) .journey-copy h1{font-size:clamp(2.7rem,5.2vw,3.5rem)}.journey:not(.journey-simple) .journey-copy:not(.first-chapter){max-width:300px}.chapter-nav button{font-size:12px;padding:6px;gap:6px}.tour-actions{gap:9px}.journey-bottom{left:5vw;right:5vw;bottom:25px}.journey:not(.journey-simple) .journey-stage:after{background:linear-gradient(90deg,#081320d0,transparent 70%),linear-gradient(0deg,#081320b0,transparent 25%)}}
 .tour-opt-in { margin-top: 20px; }
 .tour-opt-in p { font-size: 12px; color: #bcc6cf; margin-top: 9px; max-width: 320px; }
-.tour-actions button.photo-view { width: auto; border-radius: 0; padding: 0 10px; font-size: 11px; }
 @media (max-width: 720px) {
   .journey-simple { height: 960px; min-height: 960px; }
   .journey-simple .journey-fallback { top: 625px; }
   .journey-simple .journey-bottom { background: #081320; padding: 10px 0; }
-  .journey:not(.journey-simple) .scene-host { top: 255px; bottom: 150px; }
+  .journey:not(.journey-simple) .scene-host { inset: 0; }
+  .journey:not(.journey-simple) .journey-stage { min-height: 0; }
+  .journey:not(.journey-simple) .journey-stage:after { background: linear-gradient(180deg, #081320ed 0%, #081320a3 24%, transparent 43%, transparent 68%, #081320d9 100%); }
   .journey:not(.journey-simple) .journey-copy,
   .journey:not(.journey-simple) .journey-copy.first-chapter { top: 115px; bottom: auto; left: 6vw; right: 6vw; padding: 0; background: none; }
   .journey:not(.journey-simple) .journey-copy h1 { font-size: clamp(2rem, 7vw, 2.7rem); }
   .journey:not(.journey-simple) .journey-copy .eyebrow { margin-bottom: 12px; }
   .journey:not(.journey-simple) .journey-copy > p:not(.eyebrow),
   .journey:not(.journey-simple) .journey-copy .text-link { display: none; }
-  .journey:not(.journey-simple) .journey-bottom { flex-direction: column; align-items: stretch; gap: 12px; background: #081320ed; padding-top: 12px; bottom: 15px; }
+  .journey:not(.journey-simple) .journey-bottom { flex-direction: column; align-items: stretch; gap: 8px; background: transparent; padding-top: 0; bottom: max(12px, env(safe-area-inset-bottom)); }
   .chapter-nav { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; }
-  .chapter-nav button { padding: 6px 2px; font-size: 11px; gap: 4px; height: 44px; }
+  .chapter-nav { background: #08132066; border: 1px solid #ffffff26; border-radius: 16px; padding: 4px; backdrop-filter: blur(8px); }
+  .chapter-nav button { padding: 6px 2px; font-size: 12px; gap: 4px; height: 44px; border-radius: 11px; }
+  .chapter-nav button[aria-pressed='true'] { background: #dbc29a1a; border-bottom: 0; }
   .chapter-nav button span { display: none; }
   .tour-actions { justify-content: space-between; }
+  .tour-actions button { min-width: 44px; min-height: 44px; }
+  .tour-actions > a { min-height: 44px; font-size: 12px; }
 }
 .tour-loading { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding-left: 42%; background: #091522; color: #dbc29a; }
 .loading-mark { font: 64px Georgia, serif; opacity: .55; }
 .tour-loading p { font-size: 12px; letter-spacing: .12em; margin-top: 15px; }
 .loading-track { width: 170px; height: 2px; margin-top: 18px; background: #ffffff20; }
 .loading-track span { display: block; height: 100%; background: #dbc29a; transition: width .2s; }
-@media(max-width:720px) { .tour-loading { padding-left: 0; top: 255px; bottom: 150px; } }
+@media(max-width:720px) { .tour-loading { padding-left: 0; inset: 0; } }
+@media (max-height: 540px) and (max-width: 1000px) {
+  .site-header { height: 62px; padding: 0 4vw; }
+  .site-header nav > a:not(.nav-quote) { display: none; }
+  .wordmark span { font-size: 20px; }
+  .wordmark small { font-size: 8px; margin-top: 3px; }
+  .journey:not(.journey-simple) .journey-stage { min-height: 0; }
+  .journey:not(.journey-simple) .scene-host { inset: 0; }
+  .journey:not(.journey-simple) .journey-copy,
+  .journey:not(.journey-simple) .journey-copy.first-chapter { top: 86px; bottom: auto; left: 4vw; right: auto; max-width: 34vw; padding: 0; background: none; }
+  .journey:not(.journey-simple) .journey-copy h1 { font-size: clamp(1.6rem, 3.8vw, 2.2rem); }
+  .journey:not(.journey-simple) .journey-copy .eyebrow { font-size: 10px; margin-bottom: 10px; }
+  .journey:not(.journey-simple) .journey-copy > p:not(.eyebrow),
+  .journey:not(.journey-simple) .journey-copy .text-link { display: none; }
+  .journey:not(.journey-simple) .journey-stage:after { background: linear-gradient(90deg, #081320bd, transparent 50%), linear-gradient(0deg, #081320db, transparent 35%); }
+  .journey:not(.journey-simple) .journey-bottom { left: 4vw; right: 4vw; bottom: max(10px, env(safe-area-inset-bottom)); display: flex; flex-direction: row; gap: 18px; padding: 0; border: 0; background: transparent; }
+  .chapter-nav { flex: 1; display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; background: #08132066; border-radius: 14px; border: 1px solid #ffffff26; padding: 3px; backdrop-filter: blur(8px); }
+  .chapter-nav button { min-height: 44px; padding: 4px; font-size: 12px; border-radius: 10px; }
+  .chapter-nav button span { display: none; }
+  .chapter-nav button[aria-pressed='true'] { background: #dbc29a1a; border-bottom: 0; }
+  .tour-actions { gap: 12px; }
+  .tour-actions > span { display: none; }
+  .tour-actions button { min-width: 44px; min-height: 44px; }
+  .tour-actions > a { min-height: 44px; }
+}

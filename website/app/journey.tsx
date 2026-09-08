@@ -43,7 +43,6 @@ export default function Journey() {
     [failed, setFailed] = useState(false),
     [simple, setSimple] = useState(false),
     [optedIn, setOptedIn] = useState(false),
-    [photoMode, setPhotoMode] = useState(false),
     [loadPercent, setLoadPercent] = useState(0),
     [chapter, setChapter] = useState(0),
     [paused, setPaused] = useState(false);
@@ -54,15 +53,15 @@ export default function Journey() {
         reduce.matches ||
         (navigator as Navigator & { connection?: { saveData: boolean } })
           .connection?.saveData;
-      setSimple(photoMode || (!!limited && !optedIn));
-      if (photoMode || (limited && !optedIn)) setChapter(0);
+      setSimple(!!limited && !optedIn);
+      if (limited && !optedIn) setChapter(0);
     };
     update();
     reduce.addEventListener('change', update);
     return () => {
       reduce.removeEventListener('change', update);
     };
-  }, [optedIn, photoMode]);
+  }, [optedIn]);
   useEffect(() => {
     if (simple) return;
     setReady(false);
@@ -178,7 +177,7 @@ export default function Journey() {
           )}
           {fallback && !failed && (
             <div className="tour-opt-in">
-              <Button className="prepare-button" onClick={() => { setPhotoMode(false); setOptedIn(true); }}>
+              <Button className="prepare-button" onClick={() => setOptedIn(true)}>
                 <Play size={16} /> Explore in 3D
               </Button>
               <p>Drive in, open the passenger door, and step inside.</p>
@@ -226,7 +225,6 @@ export default function Journey() {
                 <a href="#details">
                   Skip tour <ArrowDown size={14} />
                 </a>
-                <Button variant="ghost" className="photo-view" onClick={() => { setPhotoMode(true); window.scrollTo({ top: 0, behavior: 'instant' }); }}>Photo view</Button>
               </div>
             </>
           ) : (

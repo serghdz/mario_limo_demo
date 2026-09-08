@@ -9,6 +9,7 @@ export const metadata: Metadata = {
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
+      <head><script src="/tour-start.js" /></head>
       <body>{children}</body>
     </html>
   );
