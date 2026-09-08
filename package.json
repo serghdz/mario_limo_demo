@@ -1,0 +1,12 @@
+{
+  "name": "limo-mario-project",
+  "private": true,
+  "scripts": {
+    "setup": "npm --prefix website ci",
+    "dev": "npm --prefix website run dev -- --host 127.0.0.1 --port 3000",
+    "build": "npm --prefix website run build",
+    "build:pages": "npm --prefix website run build:pages",
+    "preview:pages": "npm --prefix website run preview:pages",
+    "typecheck": "npm --prefix website run typecheck"
+  }
+}

@@ -1,0 +1,28 @@
+# Only the web demo and its repository configuration belong in Git.
+/*
+!/.gitignore
+!/.gitattributes
+!/README.md
+!/package.json
+!/.github/
+!/website/
+
+# Never include caches, local configuration, secrets, or QA captures.
+**/node_modules/
+**/dist/
+**/dist-pages/
+**/.next/
+**/.vinext/
+**/.wrangler/
+**/.env*
+**/*.pem
+**/*.key
+**/*.tsbuildinfo
+**/*.log
+**/.DS_Store
+**/Thumbs.db
+/website/qa/
+/website/.codex/
+/website/.agents/
+/website/.openai/*
+!/website/.openai/hosting.json
